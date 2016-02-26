@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
+<Configure id='jms-webapp-wac' class="org.eclipse.jetty.webapp.WebAppContext">
+	<New id="connectionFactory" class="org.eclipse.jetty.plus.jndi.Resource">
+		<Arg>
+			<Ref id='jms-webapp-wac' />
+		</Arg>
+		<Arg>jms/ConnectionFactory</Arg>
+		<Arg>
+			<New class="org.apache.activemq.ActiveMQConnectionFactory">
+				<Arg>tcp://localhost:61616</Arg>
+			</New>
+		</Arg>
+	</New>
+	<New id="fooQueue" class="org.eclipse.jetty.plus.jndi.Resource">
+		<Arg>jms/FooQueue</Arg>
+		<Arg>
+			<New class="org.apache.activemq.command.ActiveMQQueue">
+				<Arg>FOO.QUEUE</Arg>
+			</New>
+		</Arg>
+	</New>
+</Configure>
